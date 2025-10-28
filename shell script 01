@@ -1,0 +1,183 @@
+Task:
+
+1.	Run any 5 commands in single shell script
+ ls -lrt
+ du
+ df
+ free -m
+ one file
+ one directory
+
+2. use the read command twice and one is to create a file and another one is to create a directory
+and file and directory should have read write permission
+
+----------------------------------------------------------------------------
+
+
+what is Shell script:
+
+1. To automate the tasks/small chunk of code 
+2. we can run many task /many command in a single file using shell script 
+
+Scenario 1:
+
+If I want to create 100 files with some permission or different name - using shell script we can achieve
+
+Scenario 2:
+
+VM - have memory issue , it consume more memory ( if it is exceed 80% - it should alert us )
+
+scenario 3:
+Backup of log file 
+
+everyday logs will generate - it will occupy more memory , to avoid this one , everyday night at sometime 
+need to copy the log file and tar that log file and original log file should be deleted.
+
+----------------------------------------------------------------------------------
+
+Two types of shells
+
+1. Bourne shell ( terminal start with $ ) /bin/bash
+2. C shell ( terminal start with %)
+
+Definition:
+
+A shell script is an command line interpreter and is used to perform manipulation , execution , deletion and 
+displaying result.
+
+realtime scenario:
+
+1. Database backup and deletion
+2. Memory usage alert
+3. Backup the log files
+4. cron job - scheduled jobs for cleanup activites
+
+
+----------------------------------------------------------------------------
+Basic shell script structure
+
+#!/bin/bash -> Hashbang/shebang line -> what it represent ? This is the 1st line of the shell script , which
+is used to represent that file is going to use bourne shell to execute the script.
+
+Comments:
+1.	#author : ABC 
+2.	#Date : 28.10.2025
+3.	#Desc - shell script description
+
+------------------------------------------------------------------------------------------------
+
+#!/bin/bash
+#Author : ABC
+#Date   : 28/10/2025
+#Desc   : Adding two numbers
+
+<script>
+
+
+-------------------------------------------
+How to create the shell script:
+
+1.	Create a file
+2.	save the file with extension.sh
+   example: <filename>.sh
+
+vi <filename.sh> 
+
+<script>
+
+----------------------------------------------------
+How to execute the shell script
+
+syntax 1
+
+sh <filename.sh>
+
+example:
+
+sh samplefile.sh
+
+-----------------------------------
+syntax 2 :
+
+./<filename.sh>
+
+example:
+
+./<samplefile.sh>
+
+------------------------------------------------------
+#!/bin/bash
+#Author: ABC
+#Date: 28/10/25
+#Descrption: Example shell script
+
+touch sampletextfile
+
+Output:
+@visuweshkris ➜ /workspaces/shell-script (main) $ sh demo.sh
+6
+@visuweshkris ➜ /workspaces/shell-script (main) $ ls -lrth
+total 12K
+-rw-rw-rw-  1 codespace root        14 Oct 28 12:10 README.md
+-rw-rw-rw-  1 root      root         0 Oct 28 12:14 file1
+drwxrwxrwx+ 3 codespace codespace 4.0K Oct 28 13:47 shell-script
+-rw-rw-rw-  1 codespace codespace  115 Oct 28 15:04 demo.sh
+-rw-rw-rw-  1 codespace codespace    0 Oct 28 15:06 sampletextfile
+
+
+--------------------------------------------------------------
+Read : Read command s going to read the value from the CLI (end user need to provide) / terminal
+whenever we are going to execute the shell script
+
+echo: It provide the Value/output 
+
+
+For example:
+
+Read the file name and create the file based on the filename and give all the permission to the file
+
+#!/bin/bash
+#Author : ABC
+#Date : 28.10.25
+#Description : Read the file name and create the file based on the filename and give all the permission to the file
+
+echo "enter the file name" 
+read filename
+
+echo "the filename is $filename"
+
+touch $filename
+chmod 777 $filename
+
+output:
+
+@visuweshkris ➜ /workspaces/shell-script (main) $ sh shell.sh
+enter the file name - file01.txt
+file01.txt
+shell.sh: 14: Syntax error: Unterminated quoted string
+@visuweshkris ➜ /workspaces/shell-script (main) $ vi shell.sh
+@visuweshkris ➜ /workspaces/shell-script (main) $ vi shell.sh
+@visuweshkris ➜ /workspaces/shell-script (main) $ sh shell.sh
+enter the file name
+demotxtfile
+the filename is demotxtfile
+@visuweshkris ➜ /workspaces/shell-script (main) $ ls -lrth
+total 16K
+-rw-rw-rw-  1 codespace root        14 Oct 28 12:10 README.md
+-rw-rw-rw-  1 root      root         0 Oct 28 12:14 file1
+drwxrwxrwx+ 3 codespace codespace 4.0K Oct 28 13:47 shell-script
+-rw-rw-rw-  1 codespace codespace  115 Oct 28 15:04 demo.sh
+-rw-rw-rw-  1 codespace codespace    0 Oct 28 15:06 sampletextfile
+-rw-rw-rw-  1 codespace codespace  272 Oct 28 15:17 shell.sh
+-rwxrwxrwx  1 codespace codespace    0 Oct 28 15:17 demotxtfile
+
+
+
+
+
+
+
+
+
+
+
