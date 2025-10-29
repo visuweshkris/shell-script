@@ -1,0 +1,316 @@
+29/10/25
+
+
+Task:
+
+1. $*
+2. $$
+3. $!
+
+2. write shell script using parameters using any one of the operator
+
+3. write a program to check the file or directory ( -f , -d )
+
+4. -z string operator 
+
+5. Have a look on if , if else statement.
+
+
+We will discuss
+
+1. Operators
+2. Special Variables
+3. sample operator program
+4. if class
+
+-------------------------------------------
+
+How many types of operators in shell script
+
+1. Arithmetic operator
+2. Relational operator
+3. Logical operator
+4. string operator
+5. file operator
+
+1. Arithmetic operator
+
++ , - , * , / , % 
+
+--------------------------------------
+
+Addition Program:
+
+#!/bin/bash
+#Author : ABC
+#Date : 29.10.25
+
+echo "enter num 1"
+read num1
+echo "enter num 2"
+read num2
+
+sum=$(( $num1 + $num2 ))
+
+num3=$(( $sum + $num1 ))
+
+echo "sum of two numbers are $sum"
+echo "sum and num1 value is $num3"
+
+output:
+
+enter num 1
+30
+enter num 2
+20
+sum of two numbers are 50
+sum and num1 value is 80
+
+-----------------------------------------------------
+
+Parameters:
+
+read command - getting the value from the terminal
+
+I want to provide the value before executing the shell script
+
+As parameter we can provide the values in the shell script before the execution.
+
+Two types of inputs:
+
+1 Read    -  getting the value from the terminal
+2 Parameters. - we can provide the values in the shell script before the execution.
+
+------------------------------------------------------------------
+
+Parameter
+
+syntax:
+      $0       $1 $2 $3
+sh filename.sh 10 30 ABC
+
+$0 - name of the file
+$1 - first parameter (ex:10)
+$2 - second parameter (ex:30)
+$3 - third parameter (ex:ABC)
+
+
+program:
+
+
+#!/bin/bash
+
+echo "Multiplication of two numbers"
+#here multiply two numbers
+sum=$(( $1 * $2 ))
+
+echo "sum of the value is $sum"
+
+echo "name of the file is $0"
+
+output:
+@visuweshkris ➜ /workspaces/shell-script (main) $ sh parm.sh 25 30 
+Multiplication of two numbers
+sum of the value is 750
+name of the file is parm.sh
+
+---------------------------------------------------------------------------------
+special Variables:
+
+$0 - it will return the file name of the shell script
+$# - it will represent the total no of parameter which are passed
+$@ - represent the positional parameter passed to the  script 
+$? - exit status of previous command 
+
+example status 0 - previous command is clear/correct - no error
+exit status 120 ( other than zero)-> error.
+
+
+program
+
+#!/bin/bash
+
+echo "Multiplication of two numbers"
+#here multiply two numbers
+sum=$(( $1 * $2 ))
+
+echo "sum of the value is $sum"
+
+echo "name of the file is $0"
+
+echo $?
+echo $@
+echo $#
+
+output:
+
+@visuweshkris ➜ /workspaces/shell-script (main) $ sh spclvar.sh 75 18 name abc shell
+Multiplication of two numbers
+sum of the value is 1350
+name of the file is spclvar.sh
+0
+75 18 name abc shell
+5
+
+-----------------------------------------------------------------------------
+
+relational operators
+
+1 -gt - greater than               if [ 10 -gt 20 ] //false
+2 -lt - less than                  if [ 10 - lt 20 ] //true
+3 -ge - greater than or equal to   if [ 10 -ge 20 ] //false
+4 -le - less than or equal to
+5 -eq - equal to
+6 -ne - not equal to
+
+---------------------------------------------------------------------------
+
+Logical opearator
+
+-o 0R operatot 
+
+logical OR : -o
+
+1 0 = 1         if [ 100 -gt 20  -o 10 -lt 5 ] -> true 1
+0 1 = 1
+0 0 = 0
+1 1 = 1
+
+Logical AND : -a
+
+1 0 = 0         if [ 100 -gt 20  -a 10 -lt 5 ]  // false -> 0
+0 1 = 0
+0 0 = 0
+1 1 = 1
+
+-------------------------------------------------------------------------
+string operator:
+
+1. = -> assign the value to the variable
+
+example:
+
+a=5
+num=20
+
+2. == -> to check the two values are equal or not (comparing between two variables)
+
+if [ b11 == b12 ] //false
+if [ shell == shell ] //true
+
+3. != -> not equal to
+
+if [ abc != xyz ] //true
+
+---------------------------------------------------------------------
+
+file operator :
+
+-d : check the input is dir or not
+
+if [ -d $input ]
+
+-f : check the input is file or not
+-r : to check the input file is readable
+-x : to check the input is executable
+-w : writable
+-s : to check the file is empty or not.
+
+------------------------------------------------------------------------
+conditional statements:
+
+1. if statement
+2. if else statement
+3. if else ladder
+4. switch case statement
+
+------------------------------------------------------------------------
+1. if statement
+
+what is if statement : if the condition is true then 1st block of code will be exceuted
+
+syntax:
+
+if [ expression ]
+then
+  // 1st block of code
+fi
+
+example:
+
+if [ $num -gt 50 ]
+then
+  echo "the number is greater than 50"
+fi
+
+sample program:
+
+echo  "to check 2 numbers are equal or not"
+echo "first num"
+read num1
+echo "second num"
+read num2
+
+if [ $num1 -eq $num2 ]
+then
+ echo "the 2 numbers $num1 and $num2 are equal"
+fi
+
+output:
+@visuweshkris ➜ /workspaces/shell-script (main) $ sh if.sh
+to check 2 numbers are equal or not
+first num
+10
+second num
+20
+@visuweshkris ➜ /workspaces/shell-script (main) $ sh if.sh
+to check 2 numbers are equal or not
+first num
+26
+second num
+26
+the 2 numbers 26 and 26 are equal
+
+-------------------------------------------------------------
+if else statement:
+
+if the condition is true then 1st block of code will execute "else" 2nd block of code should execute.
+
+syntax:
+
+if [ expression ]
+then
+ //1st block
+else
+ //2nd block
+fi
+
+--------------------------------------------------------------------------
+example:
+
+check whether students clear the exam based on the percentage
+
+echo "check the students pass/fail"
+echo "enter the student percentage"
+read input
+
+if [ $input -ge 35 ]
+then
+ echo "student got pass with the $input percentage"
+else
+ echo "student got fail with $input mark"
+fi
+
+output:
+
+@visuweshkris ➜ /workspaces/shell-script (main) $ sh ifelse.sh
+check the students pass/fail
+enter the student percentage
+78
+student got pass with the 78 percentage
+@visuweshkris ➜ /workspaces/shell-script (main) $ sh ifelse.sh
+check the students pass/fail
+enter the student percentage
+25
+student got fail with 25 mark
+
