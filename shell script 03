@@ -1,0 +1,370 @@
+1.if statement:
+
+create a alert when threshold value memory hit 80%
+
+free -m 
+
+total - used - one value 
+
+convert into percentage
+
+use the value in the condition if it gte 80 , then show message
+
+----------------------------------------------
+
+2 try case statement with any 5 command - df du free 
+
+3. while loop
+
+create 20 file 
+
+multiply 3 - text file
+remain - log file
+
+4. For loop
+
+factorial num till 5
+1 = 1*1
+2 = 1*2
+3 = 1*2*3
+4 = 1*2*3*4
+
+
+-----------------------------------------------------------------
+
+
+
+
+
+If statements
+
+1.If else ladder
+2.switch case statement
+
+Loops
+
+1 while Loop
+2 Until Loop
+3 For Loop
+
+-------------------------------------------------------------
+
+if else Ladder statement: Its a sequence of if statement by one else statement in final.
+
+syntax:
+
+if [ expression ]
+then
+  //1st block of code
+elif [ expression ]
+then
+  // 2nd block of code
+
+elif [ expression ]
+then
+  // 3rd block of code
+
+.
+.
+.
+.
+else
+ //last block of code
+fi
+
+|| - logical OR operator
+&& - logical AND operator
+
+example:
+
+>75 <100 - toppers
+>60 <75  - 1st class
+>40 <60  - 2nd class
+>35 <40  - 3rd class
+<35      - fail
+
+
+program:
+
+#!/bin/bash
+echo "check the student pass/fail"
+echo "enter the student percentage"
+read input
+echo "enter the name of the student"
+read name
+echo $name
+
+
+if [ $input -ge 75 ] && [ $input -le 100 ]
+then
+  echo  "$name is topper"
+elif [ $input -ge 60 ] && [ $input -lt 75 ]
+then 
+  echo "$name is first class"
+elif [ $input -ge 40 ] && [ $input -lt 60 ]
+then
+  echo "$name is 2nd class"
+elif [ $input -ge 35 ] && [ $input -lt 40 ]
+then
+  echo "$name is 3rd class"
+else
+  echo "$name is fail"
+fi
+
+output:
+@visuweshkris ➜ /workspaces/shell-script (main) $ sh ifelseladder.sh
+check the student pass/fail
+enter the student percentage
+72
+enter the name of the student
+abc
+abc
+abc is first class
+@visuweshkris ➜ /workspaces/shell-script (main) $ sh ifelseladder.sh
+check the student pass/fail
+enter the student percentage
+93
+enter the name of the student
+raghu
+raghu
+raghu is topper
+---------------------------------------------------------------
+switch case statement:
+
+switch case statement is based on enduser request.
+
+for ex:
+
++ , - , * , /
+
+syntax:
+
+case "<expression>" in
+
+"<pattern>") //statement ;;
+"<pattern>") //statement ;;
+"<pattern>") //statement ;;
+"<pattern>") //statement ;;
+.
+.
+.
+.
+.
+*) //statement;;
+
+esac
+
+-----------------------------------------------------------------------------
+#!/bin/bash
+
+echo "Perform arithmetic operation for 2 inputs"
+echo "Enter num1"
+read num1
+echo "Enter num2"
+read num2
+echo "Enter the arithmetic any operator +,-,*,/"
+read opr
+
+case "$opr" in
+
+"+") result=$(( $num1 + $num2 ))
+     echo "addition of two numbers is $result" ;;
+"-") result=$(( $num1 - $num2 ))
+     echo "difference of two numbers is $result" ;;
+"*") result=$(( $num1 * $num2 ))
+     echo "multiplication of two numbers is $result" ;;
+*) echo "Its not a valid operator $opr" ;;
+
+esac
+
+------------------------------------------------------------------------------
+
+Loops
+
+1 while loop
+2 Until loop
+3 For loop
+
+while loop : A while loop executes as long as its condition is true
+
+1<5 -> true - It will execute
+2<5 -> true
+3<5
+4<5
+5<=5
+6<5 -> false - then come out of the loop
+
+syntax;
+
+while [ condition ]
+do
+  //block of code
+done
+
+--------------------------------------------
+
+example:
+
+#!/bin/bash
+
+n=1
+
+while [ $n -le 10 ]
+
+do
+  echo "$n"
+  n=$(( n+1 ))
+done
+
+output:
+
+@visuweshkris ➜ /workspaces/shell-script/loops (main) $ vi while.sh
+@visuweshkris ➜ /workspaces/shell-script/loops (main) $ sh while.sh 
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+
+---------------------------------------------------------
+until loop : It will execute the condition as long as is false 
+
+syntax
+
+until [ condition ]
+
+do
+  //block of code
+done
+
+---------------------------------------------
+example
+
+1>5  -> condition false
+2>5
+3>5
+4>5
+5>=5 -> condition is true - come out of the loop
+6>5  -> condition is true - come out of the loop
+
+------------------------------------------------
+
+#!/bin/bash
+
+n=1
+
+until [ $n -gt 10 ]
+do
+echo "$n"
+n=$(( n+1 ))
+
+done
+
+---------------------------------------------------------
+output:
+@visuweshkris ➜ /workspaces/shell-script/loops (main) $ vi until.sh
+@visuweshkris ➜ /workspaces/shell-script/loops (main) $ sh until.sh
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+@visuweshkris ➜ /workspaces/shell-script/loops (main) $ vi until.sh
+@visuweshkris ➜ /workspaces/shell-script/loops (main) $ sh until.sh
+1
+2
+3
+4
+5
+6
+7
+8
+9
+
+--------------------------------------------------------------------------
+for loop:
+
+Scene 1 : I want to pass the different values as input
+
+syntax:
+
+for <variable> in <inputs>
+do
+ //block of code
+done
+
+
+sample script:
+
+for i in 1 3 abc Linux shell
+
+do
+ echo $i
+done
+
+--------------------------------------------------------------------
+
+scene 2: in range
+
+for <variable> in {start..end}
+do
+ echo $var
+done
+
+#!/bin/bash
+
+for i in {1..20}
+do 
+ echo $i
+done
+
+increment 
+for i in {1..20..2} -> {start ..end..increment}
+
+
+-----------------------------------------------------------
+scene 3:
+
+iteration with 3 condition
+
+syntax:
+
+for (( initialize;condition;increment/decrement ))
+do
+ //block of code
+done
+
+-------------------------------------------------
+#!/bin/bash
+
+for ((i=0;i<5;i++))
+do
+echo $i
+done
+
+output:
+
+@visuweshkris ➜ /workspaces/shell-script/loops (main) $ for.sh
+bash: for.sh: command not found
+@visuweshkris ➜ /workspaces/shell-script/loops (main) $ vi for.sh
+@visuweshkris ➜ /workspaces/shell-script/loops (main) $ sh for.sh
+for.sh: 3: Syntax error: Bad for loop variable
+@visuweshkris ➜ /workspaces/shell-script/loops (main) $ chmod 777 for.sh
+@visuweshkris ➜ /workspaces/shell-script/loops (main) $ ./for.sh
+0
+1
+2
+3
+4
+
+---------------------------------------------------------------------------------------
