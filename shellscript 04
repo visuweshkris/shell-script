@@ -1,0 +1,245 @@
+functions:
+
+wap to perform free , du , df , uname , ps , top , ping and call any 4 functions and get output
+
+cron job execute what we learnt
+
+try your own cron job for creating directory
+
+
+
+Discuss topics
+
+1. Functions
+2. Cron Job
+
+1. what is function in shell script:
+
+The function are kind of method or small chunk of code , which is more readable
+and is used in the different part of the program
+
+reduce the code
+reduce the clutter in shell script and provide clear workflow.
+
+----------------------------------------------------------------------------
+syntax:
+
+#function definition
+
+functionName () {
+
+  //block of code
+
+}
+
+#Invoke the function //call
+
+<Name of the function>
+
+---------------------------------------------------------------------------------------
+example:
+
+addition () {
+sum=$(( $num1 + $num2 ))
+}
+
+-----------------------------------------------
+#!/bin/bash
+echo "enter num1"
+read num1
+echo "enter num2"
+read num2
+
+addition () {
+sum=$(( $num1 + $num2 ))
+echo "addition of two num $sum"
+}
+
+difference () {
+diff=$(( $num1 - $num2 ))
+echo "diff of two num $diff"
+}
+
+addition
+
+-----------------------------------------------------------
+#!/bin/bash
+echo "enter num1"
+read num1
+echo "enter num2"
+read num2
+#a=10
+#b=25
+#To call the function with a parameter
+#sum=$(( $1 + $2 ))
+
+addition () {
+sum=$(( $num1 + $num2 ))
+echo "addition of two num $sum"
+}
+
+difference () {
+diff=$(( $num1 - $num2 ))
+echo "diff of two num $diff"
+}
+
+addition
+difference
+
+-------------------------------------------------------------
+output:
+@visuweshkris ➜ /workspaces/shell-script (main) $ sh fun.sh
+enter num1
+25
+enter num2
+35
+addition of two num 60
+@visuweshkris ➜ /workspaces/shell-script (main) $ sh fun.sh
+enter num1
+^C
+@visuweshkris ➜ /workspaces/shell-script (main) $ vi fun.sh
+@visuweshkris ➜ /workspaces/shell-script (main) $ sh fun.sh
+enter num1
+69
+enter num2
+89
+addition of two num 158
+diff of two num -20
+
+-------------------------------------------------------------------------------------------
+CronJob:
+
+everyday you need to backup the files
+everyday make you to clear the log directory and save the logs in some other directory as archive (tar)
+
+-------------------------------------------------------------------------
+
+scene 1 : everyday mrng 10 clk on Monday it should happen
+
+-------------------------------------------------
+
+cronjob: Cron job is used to execute the shell script in specific time
+
+ex:
+
+at night 10 30
+at night 10 30 only on Wednesday
+at night 1 on the fast day of the month
+at morn 11 only on sat
+
+----------------------------------------------------
+
+how to setup the cronjob
+
+* * * * * ( left to right , need to set a time)
+
+--------------------------------------------------------------------------
+
+1st * -> It represent the min [ 0-59 ]
+
+example:
+
+5 * * * * - > It will execute every 5 min once
+30 * * * * ->
+
+----------------------------------------------------------------------------
+
+2nd * -> It represent the hour [0-23]
+
+example:
+
+* 11 * * * - It will execute 11 o clk
+2 10 * * * - it will execute 10.02 AM
+
+--------------------------------------------------------------------
+
+3rd * -> Day of the month [ 1-31 ]
+
+* * 15 * * - > every 15th day of the month it will execute
+30 20 15 * * -> every month 15th night 8.30 PM it will execute
+
+-----------------------------------------------------------------
+
+4th * -> Month of the year [ 1-12 ]
+
+45 * * 12 * -> only on dec on every 45 min once the script should execute
+30 05 10 12 * -> only on dec 10th day on morn 5.30 AM
+
+-------------------------------------------------------------------------
+5th * -> Day of the week [ 0-sun ,1-mon , 2 -tues ....6-sat ]
+
+* 06 * 12 06 -> evry sat 06 am in month of dec
+30 * * * 5 -> execute every 30 min only on Friday
+
+--------------------------------------------------------
+how to list the cronjob?
+
+crontab -l
+
+how to edit/add the cronjob?
+
+crontab -e -> Linux terminal
+
+apt-get install crontab
+choose VIM editor
+
+# 2 * *  *  6  -> the file looks like with this in crontab file
+
+
+how to setup:
+
+
+
+shell script:
+
+cron.sh - /home/user/scripts/cron.sh
+
+#!/bin/bash
+
+touch <path>/name of the file
+
+touch /home/user/shellscript/demofile.txt
+
+echo "file is created" >> demofile.txt
+
+--------------------------------------------
+
+go to crontab -e 
+
+2 * * * * /bin/bash <path of your shell script>
+
+2 * * * * /bin/bash /home/user/scripts/cron.sh
+
+-----------------------------------------------------
+
+if you want to stop it
+
+#2 * * * * /bin/bash /home/user/scripts/cron.sh
+
+
+close the file
+
+
+
+refresh the bash
+
+source ~/.bashrc
+
+--------------------------------------
+
+if you go to demofile.txt
+
+cat -n demofile.txt
+
+1. file is created
+2. file is created
+3. file is created
+
+-----------------------------
+
+https://crontab.guru/ - verify you cron 
+
+
+
+
+
